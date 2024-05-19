@@ -1,0 +1,6 @@
+@Sana.Backend.Api_HostAddress = http://localhost:5074
+
+GET {{Sana.Backend.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
