@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Sana.Backend.Domain.Common;
 using Sana.Backend.Domain.Entities;
 using Sana.Backend.Domain.Port;
 using Sana.Backend.Domain.Port.Base;
@@ -19,5 +20,9 @@ namespace Sana.Backend.Infrastructure.Repositories
                .FirstOrDefaultAsync() ?? new();
 
         public override async Task<List<Product>> ToList() => await entity.Include(p => p.Category).ToListAsync();
+
+        public override async Task<Paginate<Product>> Paginate(int page, int lenght)
+            => await Paginator<Product>.Paginate(entity.Include(p => p.Category).AsQueryable(), page, lenght);
+
     }
 }

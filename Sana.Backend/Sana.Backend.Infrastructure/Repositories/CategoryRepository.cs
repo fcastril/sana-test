@@ -26,23 +26,9 @@ namespace Sana.Backend.Infrastructure.Repositories
         public override async Task<List<Category>> ToListBy(Expression<Func<Category, bool>> expression)
             =>await entity.Where(expression).Include(p=>p.Products).ToListAsync();
 
-        public override async Task<Paginate<Category>> Paginate(int pagina, int tamaño)
-            => await Paginator<Category>.Paginate(entity.AsQueryable(), pagina, tamaño);
+        public override async Task<Paginate<Category>> Paginate(int page, int lenght)
+            => await Paginator<Category>.Paginate(entity.Include(p=>p.Products).AsQueryable(), page, lenght);
 
-        public override async Task<Paginate<Category>> Paginate(Paginate<Category> paginadoDto)
-        {
-            IQueryable<Category> Listabase;
-            if (paginadoDto.Filters != null && paginadoDto.Filters.Count > 0)
-            {
-                Listabase = ConfigurateFilters(entity, paginadoDto);
-
-            }
-            else
-            {
-                Listabase = entity.Include(p=>p.Products).AsQueryable<Category>();
-            }
-
-            return await Paginator<Category>.Paginate(Listabase, paginadoDto.Page, paginadoDto.Count);
-        }
+     
     }
 }
