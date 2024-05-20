@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Sana.Backend.Domain.Common.Constants;
 using Sana.Backend.Domain.Entities;
 using Sana.Backend.Domain.Port.Base;
-using System.Net.WebSockets;
 
 namespace Sana.Backend.Infrastructure.SQLServer
 {
@@ -156,6 +156,23 @@ namespace Sana.Backend.Infrastructure.SQLServer
             };
             modelBuilder.Entity<Customer>().HasData(Customer1, Customer2);
 
+        }
+
+        public int ExecuteQuery(string query)
+        {
+            return Database.ExecuteSqlRaw(query);
+        }
+        public int ExecuteQuery(string query, params SqlParameter[] sqlParameters)
+        {
+            return Database.ExecuteSqlRaw(query, sqlParameters);
+        }
+        public Task<int> ExecuteQueryAsync(string query)
+        {
+            return Database.ExecuteSqlRawAsync(query);
+        }
+        public Task<int> ExecuteQueryAsync(string query, params SqlParameter[] sqlParameters)
+        {
+            return Database.ExecuteSqlRawAsync(query, sqlParameters);
         }
     }
 }
