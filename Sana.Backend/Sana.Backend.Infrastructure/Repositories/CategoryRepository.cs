@@ -1,4 +1,5 @@
-﻿using Sana.Backend.Domain.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Sana.Backend.Domain.Entities;
 using Sana.Backend.Domain.Port;
 using Sana.Backend.Domain.Port.Base;
 using Sana.Backend.Infrastructure.Repositories.Base;
@@ -11,5 +12,12 @@ namespace Sana.Backend.Infrastructure.Repositories
         {
 
         }
+        public override async Task<Category> GetById(Guid id)
+            => await entity
+               .Include(p => p.Products)
+               .Where(c => c.Id == id)
+               .FirstOrDefaultAsync() ?? new();
+
+        public override async Task<List<Category>> ToList() => await entity.Include(p => p.Products).ToListAsync();
     }
 }

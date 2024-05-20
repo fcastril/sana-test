@@ -1,12 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Sana.Backend.Domain.Common;
 using Sana.Backend.Domain.Port.Base;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Sana.Backend.Infrastructure.Repositories.Base
 {
@@ -14,7 +9,7 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
                where T : BaseEntity, new()
     {
         public IMainContext MainContext { get; set; }
-        private DbSet<T> entity;
+        protected DbSet<T> entity;
 
         public RepositoryBase(IMainContext mainContext)
         {
@@ -22,11 +17,11 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
             entity = MainContext.Set<T>();
         }
 
-        public async Task<T> GetById(Guid id) => await entity.FindAsync(id)??new();
+        public virtual async Task<T> GetById(Guid id) => await entity.FindAsync(id) ?? new();
 
-        public async Task<List<T>> ToList() => await entity.ToListAsync();
+        public virtual async Task<List<T>> ToList() => await entity.ToListAsync();
 
-        public async Task<bool> Delete(Guid id)
+        public virtual async Task<bool> Delete(Guid id)
         {
             bool returnDelete = false;
 
@@ -41,7 +36,7 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
             return returnDelete;
         }
 
-        public async Task<T> Create(T obj)
+        public virtual async Task<T> Create(T obj)
         {
             await entity.AddAsync(obj);
             await MainContext.SaveChangesAsync();
@@ -49,29 +44,29 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
         }
 
 
-        public async Task<T> Update(T obj)
+        public virtual async Task<T> Update(T obj)
         {
             entity.Update(obj);
             await MainContext.SaveChangesAsync();
             return obj;
         }
 
-        public async Task<List<T>> ToListBy(Expression<Func<T, bool>> expression)
+        public virtual async Task<List<T>> ToListBy(Expression<Func<T, bool>> expression)
         {
             return await entity.Where(expression).ToListAsync();
         }
 
-        public async Task<T> FirstOrDefautlBy(Expression<Func<T, bool>> expression)
+        public virtual async Task<T> FirstOrDefautlBy(Expression<Func<T, bool>> expression)
         {
             return await entity.Where(expression).SingleOrDefaultAsync();
         }
 
-        public async Task<Paginate<T>> Paginate(int pagina, int tamaño)
+        public virtual async Task<Paginate<T>> Paginate(int pagina, int tamaño)
         {
             return await Paginator<T>.Paginate(entity.AsQueryable(), pagina, tamaño);
         }
 
-        public async Task<Paginate<T>> Paginate(Paginate<T> paginadoDto)
+        public virtual  async Task<Paginate<T>> Paginate(Paginate<T> paginadoDto)
         {
             IQueryable<T> Listabase;
             if (paginadoDto.Filters != null && paginadoDto.Filters.Count > 0)
