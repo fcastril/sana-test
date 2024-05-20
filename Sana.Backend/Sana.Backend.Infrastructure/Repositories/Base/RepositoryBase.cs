@@ -82,7 +82,7 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
             return await Paginator<T>.Paginate(Listabase, paginadoDto.Page, paginadoDto.Count);
         }
 
-        private IQueryable<T> ConfigurateFilters(IQueryable<T> query, Paginate<T> paginate)
+        protected IQueryable<T> ConfigurateFilters(IQueryable<T> query, Paginate<T> paginate)
         {
             if (paginate != null)
             {
