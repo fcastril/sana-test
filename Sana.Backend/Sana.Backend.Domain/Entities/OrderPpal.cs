@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace Sana.Backend.Domain.Entities
 {
-    public class Order : BaseEntity
+    public class OrderPpal : BaseEntity
     {
         [JsonPropertyName("document")]
         [Required]
@@ -31,7 +31,7 @@ namespace Sana.Backend.Domain.Entities
 
         public Guid? OrderId { get; set; }
         [JsonPropertyName("order")]
-        public Order? Order { get; set; }
+        public OrderPpal? Order { get; set; }
 
         [JsonPropertyName("productId")]
         [Required]

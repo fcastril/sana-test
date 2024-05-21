@@ -7,12 +7,12 @@ namespace Sana.Backend.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomerController : BaseController<Customer>
+    public class OrderController : BaseController<OrderPpal>
     {
-        private ICustomerRepository _customerRepository;
-        public CustomerController(ICustomerRepository repository) : base(repository)
+        private readonly IOrderRepository _orderRepository;
+        public OrderController(IOrderRepository repository) : base(repository)
         {
-            _customerRepository = repository;
+            _orderRepository = repository;
         }
 
         [HttpGet("document/{document}")]
@@ -20,7 +20,7 @@ namespace Sana.Backend.Api.Controllers
         {
             try
             {
-                return Ok(await _customerRepository.GetByDocument(document));
+                return Ok(await _orderRepository.GetOrderByDocument(document));
             }
             catch (Exception ex)
             {

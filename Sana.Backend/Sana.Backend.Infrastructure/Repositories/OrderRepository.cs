@@ -8,28 +8,28 @@ using System.Linq.Expressions;
 
 namespace Sana.Backend.Infrastructure.Repositories
 {
-    public class OrderRepository : RepositoryBase<Order>, IRepositoryBase<Order>, IOrderRepository
+    public class OrderRepository : RepositoryBase<OrderPpal>, IRepositoryBase<OrderPpal>, IOrderRepository
     {
         public OrderRepository(IMainContext mainContext) : base(mainContext)
         {
 
         }
-        public override async Task<Order> GetById(Guid id)
+        public override async Task<OrderPpal> GetById(Guid id)
             => await entity
                .Include(p => p.Items)
                .Include(c => c.Customer)
                .Where(c => c.Id == id)
                .FirstOrDefaultAsync() ?? new();
 
-        public override async Task<List<Order>> ToList() => await entity.Include(p => p.Items).Include(c => c.Customer).ToListAsync();
+        public override async Task<List<OrderPpal>> ToList() => await entity.Include(p => p.Items).Include(c => c.Customer).ToListAsync();
 
-        public override async Task<List<Order>> ToListBy(Expression<Func<Order, bool>> expression)
+        public override async Task<List<OrderPpal>> ToListBy(Expression<Func<OrderPpal, bool>> expression)
             => await entity.Where(expression).Include(p => p.Items).Include(c => c.Customer).ToListAsync();
 
-        public override async Task<Paginate<Order>> Paginate(int page, int lenght)
-            => await Paginator<Order>.Paginate(entity.Include(p => p.Items).Include(c => c.Customer).AsQueryable(), page, lenght);
+        public override async Task<Paginate<OrderPpal>> Paginate(int page, int lenght)
+            => await Paginator<OrderPpal>.Paginate(entity.Include(p => p.Items).Include(c => c.Customer).AsQueryable(), page, lenght);
 
-        public async Task<Order> GetOrderByDocument(string document)
+        public async Task<OrderPpal> GetOrderByDocument(string document)
             => await entity.Where(o => o.Document == document).Include(p => p.Items).Include(c => c.Customer).FirstOrDefaultAsync()??new();
 
     }

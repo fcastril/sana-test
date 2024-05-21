@@ -3,8 +3,8 @@ using Sana.Backend.Domain.Port.Base;
 
 namespace Sana.Backend.Domain.Port
 {
-    public interface IOrderRepository : IRepositoryBase<Order>
+    public interface IOrderRepository : IRepositoryBase<OrderPpal>
     {
-        Task<Order?> GetOrderByDocument(string document);
+        Task<OrderPpal> GetOrderByDocument(string document);
     }
 }

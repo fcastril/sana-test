@@ -9,7 +9,7 @@ namespace Sana.Backend.Api.Controllers
     [ApiController]
     public class CustomerController : BaseController<Customer>
     {
-        private ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         public CustomerController(ICustomerRepository repository) : base(repository)
         {
             _customerRepository = repository;

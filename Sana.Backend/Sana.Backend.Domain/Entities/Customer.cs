@@ -37,6 +37,6 @@ namespace Sana.Backend.Domain.Entities
         [Required]
         public string Cellphone { get; set; } = string.Empty;
         [JsonPropertyName("Orders")]
-        public ICollection<Order>? Orders { get; set; }
+        public ICollection<OrderPpal>? Orders { get; set; }
     }
 }
