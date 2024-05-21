@@ -9,11 +9,9 @@ namespace Sana.Backend.Domain.Entities
     {
         [JsonPropertyName("code")]
         [Column(nameof(Category.Code), TypeName = "nvarchar(20)")]
-        [Required]
         public string Code { get; set; } = string.Empty;
         [JsonPropertyName("description")]
         [Column(nameof(Category.Description), TypeName = "nvarchar(100)")]
-        [Required]
         public string Description { get; set; } = String.Empty;
         [JsonPropertyName("products")]
         public ICollection<Product>? Products { get; set;}

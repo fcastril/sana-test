@@ -39,6 +39,7 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
         public virtual async Task<T> Create(T obj)
         {
             await entity.AddAsync(obj);
+           
             await MainContext.SaveChangesAsync();
             return obj;
         }

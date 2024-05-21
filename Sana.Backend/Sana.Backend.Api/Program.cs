@@ -2,6 +2,7 @@ using Sana.Backend.Domain.Entities;
 using Sana.Backend.Domain.Port;
 using Sana.Backend.Infrastructure;
 using Sana.Backend.Infrastructure.GraphQL.Queries;
+using System.Text.Json.Serialization;
 
 
 
@@ -9,7 +10,11 @@ var builder = WebApplication.CreateBuilder(args);
 ConfigureServices(builder.Services);
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

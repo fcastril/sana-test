@@ -13,6 +13,9 @@ namespace Sana.Backend.Infrastructure.SQLServer
         public MainContext(DbContextOptions<MainContext> options, IConfiguration configuration) : base(options)
         {
             _configuration = configuration;
+            base.ChangeTracker.AutoDetectChangesEnabled = false;
+
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

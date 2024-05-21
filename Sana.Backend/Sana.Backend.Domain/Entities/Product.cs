@@ -1,5 +1,6 @@
 ﻿using Sana.Backend.Domain.Common;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Sana.Backend.Domain.Entities
@@ -32,8 +33,6 @@ namespace Sana.Backend.Domain.Entities
 
         public Guid CategoryId { get; set; }
         [JsonPropertyName("category")]
-        [Required]
-
         public Category? Category { get; set; }
     }
 }

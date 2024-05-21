@@ -96,7 +96,7 @@ namespace Sana.Backend.Api.Controllers.Base
                 return BadRequest(ex);
             }
         }
-        [HttpPost("paginator/pageNo/{pageNo}/pages/{pages}")]
+        [HttpPost("paginator/page/{page}/lenght/{lenght}")]
         public async Task<IActionResult> PaginatorPage(int page, int lenght)
         {
             try
