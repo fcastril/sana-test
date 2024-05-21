@@ -11,12 +11,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
                 string description
             )
         {
-            Category category = new()
-            {
-                Id = Guid.NewGuid(),
-                Code = code,
-                Description = description
-            };
+            Category category = new(code, description);
             return await categoryRepository.Create(category);
         }
 
@@ -27,12 +22,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
             string description
             )
         {
-            Category category = new()
-            {
-                Id = id,
-                Code = code,
-                Description = description
-            };
+            Category category = new(code, description, id);
 
             return await categoryRepository.Update(category);
         }

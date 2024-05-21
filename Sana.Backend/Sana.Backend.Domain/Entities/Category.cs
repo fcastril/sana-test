@@ -7,6 +7,17 @@ namespace Sana.Backend.Domain.Entities
 {
     public class Category : BaseEntity
     {
+        public Category()
+        {
+                
+        }
+        public Category(string code, string description, Guid? id = null)
+        {
+            Id = id ?? Guid.NewGuid();
+            Code = code;
+            Description = description;
+            
+        }
         [JsonPropertyName("code")]
         [Column(nameof(Category.Code), TypeName = "nvarchar(20)")]
         public string Code { get; set; } = string.Empty;
