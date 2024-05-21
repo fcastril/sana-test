@@ -1,6 +1,7 @@
 using Sana.Backend.Domain.Entities;
 using Sana.Backend.Domain.Port;
 using Sana.Backend.Infrastructure;
+using Sana.Backend.Infrastructure.GraphQL.Mutations;
 using Sana.Backend.Infrastructure.GraphQL.Queries;
 using System.Text.Json.Serialization;
 
@@ -44,7 +45,8 @@ void ConfigureServices(IServiceCollection services)
 {
     services.AddDependencyInjectionsInfrastructure(builder.Configuration);
     services.AddGraphQLServer()
-        .AddQueryType<Query>();
+        .AddQueryType<Query>()
+        .AddMutationType<Mutation>();
     services.AddCors(options =>
     {
         options.AddPolicy(name: "MyPolicyCors", builder =>
