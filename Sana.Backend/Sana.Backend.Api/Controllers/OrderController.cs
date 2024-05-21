@@ -20,7 +20,7 @@ namespace Sana.Backend.Api.Controllers
         {
             try
             {
-                return Ok(await _customerRepository.GetCustomerByDocument(document));
+                return Ok(await _customerRepository.GetByDocument(document));
             }
             catch (Exception ex)
             {

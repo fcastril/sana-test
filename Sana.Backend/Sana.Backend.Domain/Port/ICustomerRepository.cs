@@ -5,5 +5,6 @@ namespace Sana.Backend.Domain.Port
 {
     public interface ICustomerRepository : IRepositoryBase<Customer>
     {
+        Task<Customer> GetCustomerByDocument(string document);
     }
 }

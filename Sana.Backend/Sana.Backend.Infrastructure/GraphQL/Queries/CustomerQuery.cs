@@ -17,7 +17,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Queries
          => await repository.Paginate(page, lenght);
 
         public async Task<Customer> GetCustomerByDocument([Service] ICustomerRepository repository, string Document)
-             => await repository.FirstOrDefautlBy(c=>c.Document == Document);
+             => await repository.GetCustomerByDocument(Document);
 
     }
 

@@ -5,5 +5,6 @@ namespace Sana.Backend.Domain.Port
 {
     public interface IOrderRepository : IRepositoryBase<Order>
     {
+        Task<Order?> GetOrderByDocument(string document);
     }
 }
