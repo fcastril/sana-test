@@ -9,7 +9,7 @@ namespace Sana.Backend.Api.Controllers.Base
     public abstract partial class BaseController<ENT> : Controller
         where ENT : BaseEntity, new()
     {
-        private readonly IRepositoryBase<ENT> _repository;
+        protected readonly IRepositoryBase<ENT> _repository;
 
         protected BaseController(IRepositoryBase<ENT> repository)
         {
