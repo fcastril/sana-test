@@ -15,15 +15,15 @@ namespace Sana.Backend.Infrastructure.Repositories
         {
 
         }
-        public override async Task<Category> GetById(Guid id)
+        public override async Task<Category?> GetById(Guid id)
             => await entity
                .Include(p => p.Products)
                .Where(c => c.Id == id)
-               .FirstOrDefaultAsync() ?? new();
+               .FirstOrDefaultAsync();
 
-        public override async Task<List<Category>> ToList() => await entity.Include(p => p.Products).ToListAsync();
+        public override async Task<List<Category>?> ToList() => await entity.Include(p => p.Products).ToListAsync();
 
-        public override async Task<List<Category>> ToListBy(Expression<Func<Category, bool>> expression)
+        public override async Task<List<Category>?> ToListBy(Expression<Func<Category, bool>> expression)
             =>await entity.Where(expression).Include(p=>p.Products).ToListAsync();
 
         public override async Task<Paginate<Category>> Paginate(int page, int lenght)

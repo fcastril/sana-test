@@ -7,6 +7,22 @@ namespace Sana.Backend.Domain.Entities
 {
     public class Product : BaseEntity
     {
+        public Product()
+        {
+            
+        }
+
+        public Product(string code, string name, string urlImage, decimal price, int stock, Category category, Guid? id = null)
+        {
+            Id = id ?? Guid.NewGuid();
+            Code = code;
+            Name = name;
+            UrlImage = urlImage;
+            Price = price;
+            Stock = stock;
+            CategoryId = category.Id;
+            Category = category;
+        }
         [JsonPropertyName("code")]
         [Required]
         public string Code { get; set; } = string.Empty;

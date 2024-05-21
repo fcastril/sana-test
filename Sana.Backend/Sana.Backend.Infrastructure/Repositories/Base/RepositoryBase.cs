@@ -8,13 +8,14 @@ namespace Sana.Backend.Infrastructure.Repositories.Base
     public class RepositoryBase<T> : IRepositoryBase<T>
                where T : BaseEntity, new()
     {
-        public IMainContext MainContext { get; set; }
+        protected IMainContext MainContext { get; set; }
         protected DbSet<T> entity;
 
         public RepositoryBase(IMainContext mainContext)
         {
             MainContext = mainContext;
             entity = MainContext.Set<T>();
+           
         }
 
         public virtual async Task<T> GetById(Guid id) => await entity.FindAsync(id) ?? new();

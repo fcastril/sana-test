@@ -7,9 +7,9 @@ namespace Sana.Backend.Domain.Port.Base
            where T : class, new()
     {
 
-        Task<T> GetById(Guid id);
+        Task<T?> GetById(Guid id);
 
-        Task<List<T>> ToList();
+        Task<List<T>?> ToList();
 
         Task<bool> Delete(Guid id);
 
@@ -17,9 +17,9 @@ namespace Sana.Backend.Domain.Port.Base
 
         Task<T> Update(T entity);
 
-        Task<List<T>> ToListBy(Expression<Func<T, bool>> expression);
+        Task<List<T>?> ToListBy(Expression<Func<T, bool>> expression);
 
-        Task<T> FirstOrDefautlBy(Expression<Func<T, bool>> expression);
+        Task<T?> FirstOrDefautlBy(Expression<Func<T, bool>> expression);
 
         Task<Paginate<T>> Paginate(int page, int lenght);
 

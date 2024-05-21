@@ -7,6 +7,29 @@ namespace Sana.Backend.Domain.Entities
 {
     public class Customer : BaseEntity
     {
+        public Customer()
+        {
+            
+        }
+        public Customer(string document, 
+                    string name, 
+                    string address,
+                    string city,
+                    string email, 
+                    string telephone,
+                    string cellphone,
+                    Guid? Id=null)
+        {
+             Id = Id ?? Guid.NewGuid();
+            Document = document;
+            Name = name;
+            Address = address;
+            City = city;
+            Email = email;
+            Telephone = telephone;
+            Cellphone = cellphone;
+
+        }
         [JsonPropertyName("document")]
         [Required]
         [Column(nameof(Customer.Document), TypeName = "nvarchar(20)")]
