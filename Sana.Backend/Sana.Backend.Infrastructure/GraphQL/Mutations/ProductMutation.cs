@@ -16,7 +16,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
                 Guid categoryId
             )
         {
-            Category category = await categoryRepository.GetById( categoryId );
+            Category? category = await categoryRepository.GetById( categoryId );
             if (category == null)
                    throw   new Exception("Error: CategoryId not found");
 
@@ -36,7 +36,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
                         Guid categoryId
                     )
         {
-            Category category = await categoryRepository.GetById(categoryId);
+            Category? category = await categoryRepository.GetById(categoryId);
             if (category == null)
                 throw new Exception("Error: CategoryId not found");
 

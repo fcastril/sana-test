@@ -6,6 +6,25 @@ namespace Sana.Backend.Domain.Entities
 {
     public class OrderPpal : BaseEntity
     {
+        public OrderPpal()
+        {
+
+        }
+        public OrderPpal(
+                string document,
+                DateTime date,
+                Customer customer,
+                ICollection<OrderDetail>? items = null,
+                Guid? id = null
+            )
+        {
+            Id = id ?? Guid.NewGuid();
+            Document = document;
+            Date = date;
+            Customer = customer;
+            CustomerId = customer.Id;
+            Items = items;
+        }
         [JsonPropertyName("document")]
         [Required]
 
@@ -13,7 +32,7 @@ namespace Sana.Backend.Domain.Entities
         [JsonPropertyName("date")]
         [Required]
 
-        public DateTime date { get; set; }
+        public DateTime Date { get; set; }
         [JsonPropertyName("customerId")]
         [Required]
 
@@ -26,6 +45,26 @@ namespace Sana.Backend.Domain.Entities
 
     public class OrderDetail : BaseEntity
     {
+        public OrderDetail()
+        {
+
+        }
+        public OrderDetail(
+                OrderPpal order,
+                Product product,
+                int quantity,
+                 decimal price,
+                 Guid? Id = null
+            )
+        {
+            Id = Id ?? Guid.NewGuid();
+            Order = order;
+            OrderId = order.Id;
+            ProductId = product.Id;
+            Product = product;
+            Quantity = quantity;
+            Price = price;
+        }
         [JsonPropertyName("orderId")]
         [Required]
 

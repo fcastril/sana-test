@@ -11,7 +11,8 @@ namespace Sana.Backend.Domain.Entities
         {
             
         }
-        public Customer(string document, 
+        public Customer(
+                    string document, 
                     string name, 
                     string address,
                     string city,
