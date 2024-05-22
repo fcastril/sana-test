@@ -6,7 +6,7 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
     public partial class Mutation
     {
         public async Task<OrderPpal> CreateOrder(
-                [Service] IOrderRepository OrderRepository,
+                [Service] IOrderRepository orderRepository,
                 [Service] ICustomerRepository customerRepository,
                 string document,
                 DateTime date,
@@ -17,13 +17,13 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
             if (customer == null) throw new Exception("Customer not found");
 
             OrderPpal Order = new(document, date, customer);
-            return await OrderRepository.Create(Order);
+            return await orderRepository.Create(Order);
         }
 
         public async Task<OrderPpal> UpdateOrder(
-                [Service] IOrderRepository OrderRepository,
+                [Service] IOrderRepository orderRepository,
                 [Service] ICustomerRepository customerRepository,
-                Guid Id, 
+                Guid id, 
                 string document,
                 DateTime date,
                 Guid customerId
@@ -33,8 +33,15 @@ namespace Sana.Backend.Infrastructure.GraphQL.Mutations
             Customer? customer = await customerRepository.GetById(customerId);
             if (customer == null) throw new Exception("Customer not found");
 
-            OrderPpal Order = new(document, date, customer);
-            return await OrderRepository.Update(Order);
+            OrderPpal? Order = await orderRepository.GetById(id);
+            if (customer == null) throw new Exception("Order not found");
+
+            
+            Order!.Document = document;
+            Order.Date = date;
+            Order.CustomerId = customerId;
+
+            return await orderRepository.Update(Order);
         }
 
         public async Task<bool> DeleteOrder(
