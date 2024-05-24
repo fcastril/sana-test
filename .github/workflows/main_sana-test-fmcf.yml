@@ -23,10 +23,10 @@ jobs:
           include-prerelease: true
 
       - name: Build with dotnet
-        run: dotnet build Sana.Backend/Sana.Backend.sln --configuration Release 
+        run: dotnet build Sana.Backend/Sana.Backend.Api/Sana.Backend.Api.csproj --configuration Release 
 
       - name: dotnet publish
-        run: dotnet publish Sana.Backend/Sana.Backend.sln -c Release -o ${{env.DOTNET_ROOT}}/sana-test
+        run: dotnet publish Sana.Backend/Sana.Backend.Api/Sana.Backend.Api.csproj -c Release -o ${{env.DOTNET_ROOT}}/sana-test
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
